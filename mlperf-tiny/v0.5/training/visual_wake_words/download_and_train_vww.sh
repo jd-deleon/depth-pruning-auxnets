@@ -1,3 +1,9 @@
+
+TRAIN_DIR="trained_models/vww_96_mobilenetV1"
+ARCH="mobilenetV1"
+
+export CUDA_VISIBLE_DEVICES=1
+
 #!/bin/bash
 # Downoad the dataset.
 wget https://www.silabs.com/public/files/github/machine_learning/benchmarks/datasets/vw_coco2014_96.tar.gz
