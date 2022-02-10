@@ -12,9 +12,9 @@ from tensorflow.keras.layers import Conv2D, DepthwiseConv2D, AveragePooling2D, M
 from tensorflow.keras.regularizers import l2
 
 #define model
-def mobilenet_v1():
+def mobilenet_v1(input_shape = (96,96,3)):
     # Mobilenet parameters
-    input_shape = [96,96,3] # resized to 96x96 per EEMBC requirement
+    # input_shape = [96,96,3] # resized to 96x96 per EEMBC requirement
     num_classes = 2 # person and non-person
     num_filters = 8 # normally 32, but running with alpha=.25 per EEMBC requirement
 
