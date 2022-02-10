@@ -26,26 +26,26 @@ BASE_DIR = os.path.join(os.getcwd(), 'vw_coco2014_96')
 
 
 def main(argv):
-  if len(argv) >= 2:
-    model = tf.keras.models.load_model(argv[1])
-  else:
-    # model = mobilenet_v1()
-    if FLAGS.arch=="mobilenetV1":
-      model = mobilenet_v1()
-    elif FLAGS.arch=="alexnet":
-      model = alexnet_model()
-    elif FLAGS.arch=="mobilenetV2":
-      model = tf.keras.applications.mobilenet_v2.MobileNetV2(
-        input_shape=(96,96,3), alpha=0.25, include_top=True, weights=None, classes=2)
-    elif FLAGS.arch=="resnet50":
-      model = tf.keras.applications.resnet50.ResNet50(
-        input_shape=(96,96,3), include_top=True, weights=None, classes=2)
-    elif FLAGS.arch=="nasnetMobile":
-      model = tf.keras.applications.nasnet.NASNetMobile(
-        input_shape=(96,96,3), include_top=True, weights=None, classes=2)
-    elif FLAGS.arch=="efficientNetB0":
-      model = tf.keras.applications.efficientnet.EfficientNetB0(
-        input_shape=(96,96,3), include_top=True, weights=None, classes=2)
+  # if len(argv) >= 2:
+  #   model = tf.keras.models.load_model(argv[1])
+  # else:
+  #   model = mobilenet_v1()
+  if FLAGS.arch=="mobilenetV1":
+    model = mobilenet_v1()
+  elif FLAGS.arch=="alexnet":
+    model = alexnet_model()
+  elif FLAGS.arch=="mobilenetV2":
+    model = tf.keras.applications.mobilenet_v2.MobileNetV2(
+      input_shape=(96,96,3), alpha=0.25, include_top=True, weights=None, classes=2)
+  elif FLAGS.arch=="resnet50":
+    model = tf.keras.applications.resnet50.ResNet50(
+      input_shape=(96,96,3), include_top=True, weights=None, classes=2)
+  elif FLAGS.arch=="nasnetMobile":
+    model = tf.keras.applications.nasnet.NASNetMobile(
+      input_shape=(96,96,3), include_top=True, weights=None, classes=2)
+  elif FLAGS.arch=="efficientNetB0":
+    model = tf.keras.applications.efficientnet.EfficientNetB0(
+      input_shape=(96,96,3), include_top=True, weights=None, classes=2)
 
   model.summary()
 
