@@ -111,7 +111,9 @@ def get_preprocess_audio_func(model_settings,is_training=False,background_data =
       num_spectrogram_bins = stfts.shape[-1]
       # default values used by contrib_audio.mfcc as shown here
       # https://kite.com/python/docs/tensorflow.contrib.slim.rev_block_lib.contrib_framework_ops.audio_ops.mfcc
-      lower_edge_hertz, upper_edge_hertz, num_mel_bins = 20.0, 4000.0, 40 
+      
+      lower_edge_hertz, upper_edge_hertz, num_mel_bins = 20.0, 4000.0, 10 # Changed from 20.0, 4000.0, 40 
+      
       linear_to_mel_weight_matrix = tf.signal.linear_to_mel_weight_matrix( num_mel_bins, num_spectrogram_bins,
                                                                            model_settings['sample_rate'],
                                                                            lower_edge_hertz, upper_edge_hertz)
@@ -121,7 +123,10 @@ def get_preprocess_audio_func(model_settings,is_training=False,background_data =
       log_mel_spectrograms = tf.math.log(mel_spectrograms + 1e-6)
       # Compute MFCCs from log_mel_spectrograms and take the first 13.
       mfccs = tf.signal.mfccs_from_log_mel_spectrograms(log_mel_spectrograms)[..., :model_settings['dct_coefficient_count']]
-      mfccs = tf.reshape(mfccs,[model_settings['spectrogram_length'], model_settings['dct_coefficient_count'], 1])
+      
+      # mfccs = tf.reshape(mfccs,[model_settings['spectrogram_length'], model_settings['dct_coefficient_count'], 1])
+      mfccs = tf.reshape(mfccs,[model_settings['spectrogram_length']*model_settings['dct_coefficient_count']]) # flatten
+      
       next_element['audio'] = mfccs
       #next_element['label'] = tf.one_hot(next_element['label'],12)
 
@@ -161,7 +166,9 @@ def get_preprocess_audio_func(model_settings,is_training=False,background_data =
         return numerator / denominator
     
       # Warp the linear-scale, magnitude spectrograms into the mel-scale.
-      lower_edge_hertz, upper_edge_hertz = 0.0, model_settings['sample_rate'] / 2.0
+      # lower_edge_hertz, upper_edge_hertz = 0.0, model_settings['sample_rate'] / 2.0
+      lower_edge_hertz, upper_edge_hertz = 125.0, 7500.0
+      
       linear_to_mel_weight_matrix = (
           tf.signal.linear_to_mel_weight_matrix(
               num_mel_bins=num_mel_bins,
@@ -179,6 +186,8 @@ def get_preprocess_audio_func(model_settings,is_training=False,background_data =
     
       log_mel_spec = (log_mel_spec + power_offset - 32 + 32.0) / 64.0
       log_mel_spec = tf.clip_by_value(log_mel_spec, 0, 1)
+
+      log_mel_spec = tf.reshape(log_mel_spec,[model_settings['spectrogram_length']*model_settings['dct_coefficient_count']]) # flatten
 
       next_element['audio'] = log_mel_spec
 
