@@ -216,6 +216,7 @@ def parse_command():
     parser.add_argument(
         '--epochs_recover',
         help='Additional epochs to train after reaching end sparsity, used only for polynomial training scheme',
+        default=0,
         type=int)
     parser.add_argument(
         '--start_sparsity',
