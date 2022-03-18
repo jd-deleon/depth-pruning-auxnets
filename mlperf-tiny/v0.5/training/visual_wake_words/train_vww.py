@@ -25,7 +25,7 @@ EPOCHS = 20
 BASE_DIR = os.path.join(os.getcwd(), 'vw_coco2014_96')
 
 
-def main(argv):
+def main():
   # if len(argv) >= 2:
   #   model = tf.keras.models.load_model(argv[1])
   # else:
@@ -114,4 +114,4 @@ if __name__ == '__main__':
       help='Directory to write event logs and checkpoint.')
 
   FLAGS, unparsed = parser.parse_known_args()  
-  app.run(main)
+  main()
