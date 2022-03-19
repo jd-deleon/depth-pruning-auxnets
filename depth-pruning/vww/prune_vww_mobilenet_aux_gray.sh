@@ -1,8 +1,8 @@
 #!/bin/sh
 
-TRAIN_DIR="ckpt_vww_mobilenet_pruned_gray_dscnn"
+TRAIN_DIR="ckpt_vww_mobilenet-gray_aux_dscnn"
 BASE_MODEL_PATH="vww_96_mobilenet_gray"
-DATA_DIR="/home/josen/tiny/v0.5/training/visual_wake_words/vw_coco2014_96"
+DATA_DIR=$PWD"/../../mlperf-tiny/v0.5/training/visual_wake_words/vw_coco2014_96"
 
 FROZEN_HEAD="True"
 NO_PRETRAINED="False" 

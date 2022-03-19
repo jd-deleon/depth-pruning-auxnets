@@ -2,7 +2,7 @@
 
 TRAIN_DIR="ckpt_vww_mobilenet_mag_constant"
 BASE_MODEL_PATH="vww_96_mobilenet"
-DATA_DIR="/home/josen/tiny/v0.5/training/visual_wake_words/vw_coco2014_96"
+DATA_DIR=$PWD"/../../mlperf-tiny/v0.5/training/visual_wake_words/vw_coco2014_96"
 
 FROZEN_HEAD="True"
 NO_PRETRAINED="False" 
