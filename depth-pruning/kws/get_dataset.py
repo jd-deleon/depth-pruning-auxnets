@@ -123,8 +123,8 @@ def get_preprocess_audio_func(model_settings,is_training=False,background_data =
       log_mel_spectrograms = tf.math.log(mel_spectrograms + 1e-6)
       # Compute MFCCs from log_mel_spectrograms and take the first 13.
       mfccs = tf.signal.mfccs_from_log_mel_spectrograms(log_mel_spectrograms)[..., :model_settings['dct_coefficient_count']]
-      # mfccs = tf.reshape(mfccs,[model_settings['spectrogram_length'], model_settings['dct_coefficient_count'], 1])
-      mfccs = tf.reshape(mfccs,[model_settings['spectrogram_length']*model_settings['dct_coefficient_count']]) # flatten
+      mfccs = tf.reshape(mfccs,[model_settings['spectrogram_length'], model_settings['dct_coefficient_count'], 1])
+      # mfccs = tf.reshape(mfccs,[model_settings['spectrogram_length']*model_settings['dct_coefficient_count']]) # flatten
       
       next_element['audio'] = mfccs
       #next_element['label'] = tf.one_hot(next_element['label'],12)

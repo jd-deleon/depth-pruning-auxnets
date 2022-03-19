@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TRAIN_DIR="ckpt_kws_dense_hw_aux"
+TRAIN_DIR="ckpt_kws_aux_dense_hw"
 BASE_MODEL_PATH="kws_dscnn_hw"
 
 export CUDA_VISIBLE_DEVICES=1
