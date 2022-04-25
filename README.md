@@ -6,38 +6,40 @@ Depth pruning with Auxiliary Networks uses a small but highly efficient neural n
 
 ![Depth Pruning with Auxiliary Networks](figures/arch.png)
 
-Paper Links
+### Paper Links
 
 * Arxiv - https://arxiv.org/abs/2204.10546
 
-This repository contains training scripts and implementations used in the paper: Depth Pruning with Auxiliary Networks for tinyML. 
-
-Requirements:
+### Requirements:
 
 * Python 3.8
 * TensorFlow 2.3.0
 
-# Baseline Model Training
+## Baseline Model Training
 
 Base model training for Visual Wakewords and Keyword Spotting makes use of a modified verision of [MLPerf Tiny v0.5](https://github.com/mlcommons/tiny) benchmarking suite.
 
 ```
 # VWW
-sh mlperf-tiny/v0.5/training/visual_wake_words/download_and_train_vww.sh
+cd mlperf-tiny/v0.5/training/visual_wake_words/
+sh download_and_train_vww.sh
 
 # KWS
-sh mlperf-tiny/v0.5/training/keyword_spotting/build_ref.sh
+cd mlperf-tiny/v0.5/training/keyword_spotting/
+sh build_ref.sh
 ```
 
 ```
 # VWW (for Arducam Pico4ML)
-sh mlperf-tiny/v0.5/training/visual_wake_words/download_and_train_vww_gray.sh
+cd mlperf-tiny/v0.5/training/visual_wake_words/
+sh download_and_train_vww_gray.sh
 
 # KWS (for Arducam Pico4ML)
-sh mlperf-tiny/v0.5/training/keyword_spotting/build_ref.sh
+cd mlperf-tiny/v0.5/training/keyword_spotting/
+sh build_ref.sh
 ```
 
-# Depth Pruning Experiments
+## Depth Pruning Experiments
 Scripts need to be modified with correct trained base model paths
 
 ```
@@ -62,7 +64,7 @@ sh prune_kws_aux_dscnn_hw.sh
 sh quantize_kws_hw.sh
 ```
 
-# MLPerfTiny Results
+## MLPerfTiny Results
 ### Visual Wakewords
 ![Visual Wakewords](figures/vww.png)
 Pruning at block5 reduces parameters by 93% and FLOPS by 51% at a cost of 0.65% accuracy.
@@ -71,7 +73,7 @@ Pruning at block5 reduces parameters by 93% and FLOPS by 51% at a cost of 0.65% 
 ![Keyword Spotting](figures/kws.png)
 Pruning at block2 reduces parameters by 28% and FLOPS by 28% at a cost of 1.06% accuracy.
 
-# Pruned Model Performance on Cortex-M0
+## Pruned Model Performance on Cortex-M0
 ### Visual Wakewords on Cortex-M0
 ![Visual Wakewords](figures/vww-hw.png)
 Darker marks denote deeper pruning points. Pruning at block6 of MobilenetV1-VWW reduces model size from 336KB to 71KB and latency from 904ms to 551ms. Accuracy also increases from 80% to 81% which can be attributed to reduced overfitting.
@@ -80,11 +82,11 @@ Darker marks denote deeper pruning points. Pruning at block6 of MobilenetV1-VWW 
 ![Depth Pruning with Auxiliary Networks](figures/kws-hw.png)
 Darker marks denote deeper pruning points. Pruning at block-2 of DSCNN reduces model size from 54KB to 43KB and latency from 340ms to 275ms.
 
-# Citation
+## Citation
 If you find this work useful, please cite:
 
 ```
-@misc{https://doi.org/10.48550/arxiv.2204.10546,
+@misc{deleon2022,
   doi = {10.48550/ARXIV.2204.10546},
   url = {https://arxiv.org/abs/2204.10546},
   author = {De Leon, Josen Daniel and Atienza, Rowel},
